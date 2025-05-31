@@ -77,9 +77,9 @@ Current models: `dron.glb`, `viking_book.glb`, `neon_pac-man.glb`, etc.
 
 ## 🖼️ Screenshots
 
-![Home Page](screenshots/Home_page.png)
-![Blog Page](screenshots/Blog_page.png)
-![About Page](screenshots/About_page.png)
+![Home Page](Home_page.png)
+![Blog Page](Blog_page.png)
+![About Page](About_page.png)
 
 ---
 
