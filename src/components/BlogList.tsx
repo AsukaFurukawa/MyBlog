@@ -26,7 +26,18 @@ function PendantAccent() {
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += 0.15 * delta;
   });
-  return <primitive ref={ref} object={scene} scale={0.005} position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />;
+  
+  return (
+    <mesh
+      ref={ref}
+      scale={[1, 1, 1]}
+      position={[0, 0, 0]}
+      rotation={[0, 0, 0]}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="#ff6b9d" emissive="#ff6b9d" emissiveIntensity={0.3} />
+    </mesh>
+  );
 }
 
 export default function BlogList() {
@@ -90,15 +101,7 @@ export default function BlogList() {
                 <PendantAccent />
                 */}
                 {/* Simple placeholder box instead of 3D model */}
-                <mesh
-                  ref={meshRef}
-                  scale={[1, 1, 1]}
-                  position={[0, 0, 0]}
-                  rotation={[0, 0, 0]}
-                >
-                  <boxGeometry args={[1, 1, 1]} />
-                  <meshStandardMaterial color="#ff6b9d" emissive="#ff6b9d" emissiveIntensity={0.3} />
-                </mesh>
+                <PendantAccent />
               </Suspense>
               <OrbitControls enableZoom={false} enablePan={false} />
             </Canvas>
