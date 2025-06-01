@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -8,22 +8,21 @@ import { BlogPost } from '@/types/blog';
 import { useAdminAuth } from '@/components/AdminAuthContext';
 import Comments from '@/components/Comments';
 
-export default function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+export default function BlogPostPage({ params }: { params: { id: string } }) {
   const { isAdmin } = useAdminAuth();
   const router = useRouter();
-  const resolvedParams = use(params);
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (resolvedParams.id) {
+    if (params.id) {
       fetchPost();
     }
-  }, [resolvedParams.id]);
+  }, [params.id]);
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(`/api/blog?id=${resolvedParams.id}`);
+      const response = await fetch(`/api/blog?id=${params.id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch post');
       }
