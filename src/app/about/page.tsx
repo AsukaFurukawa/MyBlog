@@ -6,13 +6,22 @@ import { Suspense, useRef } from 'react';
 import Link from 'next/link';
 import { HiOutlineUser, HiAcademicCap, HiOutlineLightBulb, HiOutlineMail } from 'react-icons/hi';
 
-function About3DModel() {
-  const { scene } = useGLTF('/dron.glb');
+function FloatingDrone() {
+  // const { scene } = useGLTF('/dron.glb');
   const ref = useRef<any>();
   useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += 0.08 * delta;
+    if (ref.current) {
+      ref.current.rotation.y += delta * 0.3;
+      ref.current.position.y += Math.sin(Date.now() * 0.001) * 0.01;
+    }
   });
-  return <primitive ref={ref} object={scene} scale={2.5} position={[0, 0.5, 0]} />;
+  
+  return (
+    <mesh ref={ref} scale={[0.3, 0.3, 0.3]} position={[2, 1, -2]}>
+      <octahedronGeometry args={[1, 0]} />
+      <meshStandardMaterial color="#ff00ff" emissive="#ff00ff" emissiveIntensity={0.3} />
+    </mesh>
+  );
 }
 
 export default function AboutPage() {
@@ -23,7 +32,7 @@ export default function AboutPage() {
         <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
           <ambientLight intensity={1.2} />
           <Suspense fallback={null}>
-            <About3DModel />
+            <FloatingDrone />
           </Suspense>
           <OrbitControls enableZoom={false} enablePan={false} />
         </Canvas>
@@ -82,4 +91,4 @@ export default function AboutPage() {
   );
 }
 // @ts-ignore
-useGLTF.preload('/dron.glb'); 
+// useGLTF.preload('/dron.glb'); 

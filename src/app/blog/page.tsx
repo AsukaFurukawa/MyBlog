@@ -2,13 +2,28 @@
 
 import BlogList from '@/components/BlogList'
 import Link from 'next/link'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
 
-function FloatingDrone() {
-  const { scene } = useGLTF('/dron.glb')
-  return <primitive object={scene} scale={0.3} position={[2, 1, -2]} />
+function DroneAccent() {
+  // const { scene } = useGLTF('/dron.glb')
+  const ref = useRef<any>()
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.y += delta * 0.5
+    }
+  })
+
+  return (
+    // <mesh ref={ref} scale={[0.03, 0.03, 0.03]} position={[3, 1, -2]} rotation={[0, 0, 0.2]}>
+    //   <primitive object={scene} />
+    // </mesh>
+    <mesh ref={ref} scale={[0.5, 0.5, 0.5]} position={[3, 1, -2]} rotation={[0, 0, 0.2]}>
+      <sphereGeometry args={[1, 16, 16]} />
+      <meshStandardMaterial color="#00ffff" emissive="#00ffff" emissiveIntensity={0.2} />
+    </mesh>
+  )
 }
 
 export default function BlogPage() {
@@ -19,7 +34,7 @@ export default function BlogPage() {
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
           <ambientLight intensity={0.7} />
           <Suspense fallback={null}>
-            <FloatingDrone />
+            <DroneAccent />
           </Suspense>
           <OrbitControls enableZoom={false} enablePan={false} />
         </Canvas>

@@ -1,16 +1,27 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import BlogEditor from '@/components/BlogEditor';
 import { useAdminAuth } from '@/components/AdminAuthContext';
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, useGLTF } from '@react-three/drei'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
 import { Suspense } from 'react'
 
 function PacManAccent() {
-  const { scene } = useGLTF('/neon_pac-man.glb')
-  return <primitive object={scene} scale={0.18} position={[0, 0, 0]} />
+  const ref = useRef<any>()
+  useFrame((_, delta) => {
+    if (ref.current) {
+      ref.current.rotation.z += delta * 1.5
+    }
+  })
+
+  return (
+    <mesh ref={ref} scale={[0.4, 0.4, 0.4]} position={[2, 0, -1]} rotation={[0, 0, 0]}>
+      <sphereGeometry args={[1, 32, 16, 0, Math.PI * 2, 0, Math.PI * 1.5]} />
+      <meshStandardMaterial color="#ffff00" emissive="#ffff00" emissiveIntensity={0.5} />
+    </mesh>
+  )
 }
 
 export default function NewBlogPage() {

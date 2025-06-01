@@ -24,12 +24,21 @@ function uuidv4() {
 }
 
 function PendantAccent() {
-  const { scene } = useGLTF('/abstract_rainbow_translucent_pendant.glb');
+  // const { scene } = useGLTF('/abstract_rainbow_translucent_pendant.glb');
   const ref = useRef<any>();
   useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += 0.12 * delta;
+    if (ref.current) {
+      ref.current.rotation.y += delta * 0.5;
+      ref.current.rotation.z += delta * 0.3;
+    }
   });
-  return <primitive ref={ref} object={scene} scale={0.3} position={[0, 0, 0]} />;
+
+  return (
+    <mesh ref={ref} scale={[0.8, 0.8, 0.8]} position={[0, 0, 0]} rotation={[0, 0, 0]}>
+      <torusGeometry args={[1, 0.3, 16, 32]} />
+      <meshStandardMaterial color="#ff6b9d" emissive="#ff6b9d" emissiveIntensity={0.4} transparent opacity={0.8} />
+    </mesh>
+  );
 }
 
 interface LinkModalProps {
