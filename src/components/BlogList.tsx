@@ -7,7 +7,7 @@ import GlitchEffect from '@/components/GlitchEffect';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
-import { FaRegNewspaper } from 'react-icons/fa';
+import { HiOutlineNewspaper } from 'react-icons/hi';
 import Link from 'next/link';
 
 const categories: BlogCategory[] = [
@@ -72,7 +72,7 @@ export default function BlogList() {
         <div className="flex-1 flex flex-col items-start justify-center gap-4">
           <div className="bg-white/10 backdrop-blur-2xl rounded-2xl p-8 shadow-2xl border-none flex flex-col gap-2 max-w-xl">
             <div className="flex items-center gap-3 mb-2">
-              <FaRegNewspaper className="text-3xl text-pink-400" />
+              <HiOutlineNewspaper className="text-3xl text-pink-400" />
               <span className="text-2xl font-bold text-white tracking-widest font-orbitron drop-shadow-[0_0_24px_#8f5cff]">Welcome to the Blog</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-cyan-200 mb-2 leading-tight font-orbitron drop-shadow-[0_0_32px_#0fffc3]">Ideas, Projects, and Inspiration</h2>

@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Suspense, useRef } from 'react';
 import Link from 'next/link';
-import { FaUserAstronaut, FaGraduationCap, FaLightbulb, FaEnvelope } from 'react-icons/fa';
+import { HiOutlineUser, HiAcademicCap, HiOutlineLightBulb, HiOutlineMail } from 'react-icons/hi';
 
 function About3DModel() {
   const { scene } = useGLTF('/dron.glb');
@@ -41,7 +41,7 @@ export default function AboutPage() {
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto pb-24 w-full px-4 mt-8">
           {/* Bio */}
           <div className="bg-white/10 backdrop-blur-2xl rounded-2xl p-8 shadow-xl border-none flex flex-col gap-4 items-center animate-fade-in">
-            <FaUserAstronaut className="text-3xl text-cyan-300 mb-2" />
+            <HiOutlineUser className="text-3xl text-cyan-300 mb-2" />
             <h2 className="text-2xl font-bold text-cyan-200 mb-2">Bio</h2>
             <p className="text-cyan-300 text-center">
               I geek out over new tech, love late-night debugging, and can talk for hours about the latest in AI, 3D graphics, or why TypeScript is awesome. Always up for a challenge, a hackathon, or a deep dive into a new framework!
@@ -49,7 +49,7 @@ export default function AboutPage() {
           </div>
           {/* Education */}
           <div className="bg-white/10 backdrop-blur-2xl rounded-2xl p-8 shadow-xl border-none flex flex-col gap-4 items-center animate-fade-in delay-100">
-            <FaGraduationCap className="text-3xl text-pink-400 mb-2" />
+            <HiAcademicCap className="text-3xl text-pink-400 mb-2" />
             <h2 className="text-2xl font-bold text-pink-300 mb-2">Education</h2>
             <ul className="list-disc ml-6 text-cyan-200">
               <li>RV College of Engineering, Bengaluru<br/><span className="text-sm">B.E. in Computer Science - Data Science, 2022–2026</span></li>
@@ -59,7 +59,7 @@ export default function AboutPage() {
           </div>
           {/* Interests */}
           <div className="bg-white/10 backdrop-blur-2xl rounded-2xl p-8 shadow-xl border-none flex flex-col gap-4 items-center animate-fade-in delay-200">
-            <FaLightbulb className="text-3xl text-yellow-300 mb-2" />
+            <HiOutlineLightBulb className="text-3xl text-yellow-300 mb-2" />
             <h2 className="text-2xl font-bold text-yellow-200 mb-2">Interests</h2>
             <ul className="list-disc ml-6 text-cyan-200">
               <li>Artificial Intelligence & Machine Learning</li>
@@ -71,7 +71,7 @@ export default function AboutPage() {
           </div>
           {/* Contact */}
           <div className="bg-white/10 backdrop-blur-2xl rounded-2xl p-8 shadow-xl border-none flex flex-col gap-4 items-center animate-fade-in delay-300">
-            <FaEnvelope className="text-3xl text-cyan-400 mb-2" />
+            <HiOutlineMail className="text-3xl text-cyan-400 mb-2" />
             <h2 className="text-2xl font-bold text-cyan-300 mb-2">Contact</h2>
             <p className="text-cyan-200 text-center">Email: <span className="underline">sinharaprachi447@gmail.com</span></p>
             <p className="text-cyan-200 text-center">GitHub: <a href="https://github.com/AsukaFurukawa" className="underline text-pink-400 hover:text-cyan-300" target="_blank">AsukaFurukawa</a></p>
