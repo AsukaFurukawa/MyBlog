@@ -200,7 +200,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
 
           {/* Content */}
           <div className="p-8">
-            <div className="text-cyan-300 leading-relaxed text-lg space-y-4">
+            <div className="text-cyan-300 leading-relaxed text-lg space-y-4 whitespace-pre-wrap">
               {post.content.split('\n\n').map((paragraph, index) => (
                 <p key={index} className="mb-4">
                   {renderContentWithLinks(paragraph)}

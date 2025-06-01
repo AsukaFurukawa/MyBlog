@@ -1,15 +1,14 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import BlogEditor from '@/components/BlogEditor';
 import { BlogPost, BlogDraft } from '@/types/blog';
 import { useAdminAuth } from '@/components/AdminAuthContext';
 
-export default function EditBlogPage({ params }: { params: Promise<{ id: string }> }) {
+export default function EditBlogPage({ params }: { params: { id: string } }) {
   const { isAdmin, setShowLoginModal } = useAdminAuth();
   const router = useRouter();
-  const resolvedParams = use(params);
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,10 +19,10 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
       return;
     }
     
-    if (resolvedParams.id) {
+    if (params.id) {
       fetchPost();
     }
-  }, [resolvedParams.id, isAdmin, setShowLoginModal, router]);
+  }, [params.id, isAdmin, setShowLoginModal, router]);
 
   if (!isAdmin) {
     return (
@@ -38,7 +37,7 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
 
   const fetchPost = async () => {
     try {
-      const response = await fetch(`/api/blog?id=${resolvedParams.id}`);
+      const response = await fetch(`/api/blog?id=${params.id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch post');
       }
@@ -55,7 +54,7 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
 
   const handleSave = async (updatedPost: BlogPost) => {
     try {
-      const response = await fetch(`/api/blog?id=${resolvedParams.id}`, {
+      const response = await fetch(`/api/blog?id=${params.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -90,5 +89,5 @@ export default function EditBlogPage({ params }: { params: Promise<{ id: string 
     );
   }
 
-  return <BlogEditor initialPost={post} onSave={handleSave} />;
+  return <BlogEditor initialDraft={post} onSave={handleSave} />;
 } 

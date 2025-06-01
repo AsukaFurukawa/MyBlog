@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { HiOutlineUser, HiAcademicCap, HiOutlineLightBulb, HiOutlineMail } from 'react-icons/hi';
 
 function FloatingDrone() {
-  // const { scene } = useGLTF('/dron.glb');
+  const { scene } = useGLTF('/gp1-b_spider_submarine.glb');
   const ref = useRef<any>();
   useFrame((_, delta) => {
     if (ref.current) {
@@ -16,12 +16,7 @@ function FloatingDrone() {
     }
   });
   
-  return (
-    <mesh ref={ref} scale={[0.3, 0.3, 0.3]} position={[2, 1, -2]}>
-      <octahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial color="#ff00ff" emissive="#ff00ff" emissiveIntensity={0.3} />
-    </mesh>
-  );
+  return <primitive ref={ref} object={scene} scale={1.2} position={[0, -1.2, 0]} />;
 }
 
 export default function AboutPage() {
@@ -91,4 +86,4 @@ export default function AboutPage() {
   );
 }
 // @ts-ignore
-// useGLTF.preload('/dron.glb'); 
+useGLTF.preload('/gp1-b_spider_submarine.glb'); 

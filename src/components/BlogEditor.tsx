@@ -24,7 +24,7 @@ function uuidv4() {
 }
 
 function PendantAccent() {
-  // const { scene } = useGLTF('/abstract_rainbow_translucent_pendant.glb');
+  // For now keeping the geometric placeholder since we don't have a rainbow pendant model
   const ref = useRef<any>();
   useFrame((_, delta) => {
     if (ref.current) {
@@ -36,7 +36,15 @@ function PendantAccent() {
   return (
     <mesh ref={ref} scale={[0.8, 0.8, 0.8]} position={[0, 0, 0]} rotation={[0, 0, 0]}>
       <torusGeometry args={[1, 0.3, 16, 32]} />
-      <meshStandardMaterial color="#ff6b9d" emissive="#ff6b9d" emissiveIntensity={0.4} transparent opacity={0.8} />
+      <meshStandardMaterial 
+        color="#ff6b9d" 
+        emissive="#ff6b9d" 
+        emissiveIntensity={0.4} 
+        transparent 
+        opacity={0.8}
+        roughness={0.2}
+        metalness={0.8}
+      />
     </mesh>
   );
 }
@@ -361,7 +369,7 @@ export default function BlogEditor({ initialDraft, onSave }: BlogEditorProps) {
             {draft.content && (
               <div className="mt-4">
                 <h4 className="text-cyan-300 text-sm font-medium mb-2">Preview:</h4>
-                <div className="bg-gray-800/40 border border-cyan-500/20 rounded-lg p-4 text-cyan-300 text-sm max-h-32 overflow-y-auto">
+                <div className="bg-gray-800/40 border border-cyan-500/20 rounded-lg p-4 text-cyan-300 text-sm max-h-32 overflow-y-auto whitespace-pre-wrap">
                   {renderContentWithLinks(draft.content)}
                 </div>
               </div>

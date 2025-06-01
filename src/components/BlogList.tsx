@@ -21,23 +21,13 @@ const categories: BlogCategory[] = [
 ];
 
 function PendantAccent() {
-  // const { scene } = useGLTF('/viking_book.glb');
+  const { scene } = useGLTF('/viking_book.glb');
   const ref = useRef<any>();
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += 0.15 * delta;
   });
   
-  return (
-    <mesh
-      ref={ref}
-      scale={[1, 1, 1]}
-      position={[0, 0, 0]}
-      rotation={[0, 0, 0]}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#ff6b9d" emissive="#ff6b9d" emissiveIntensity={0.3} />
-    </mesh>
-  );
+  return <primitive ref={ref} object={scene} scale={0.005} position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />;
 }
 
 export default function BlogList() {
@@ -97,10 +87,6 @@ export default function BlogList() {
               <ambientLight intensity={1.6} />
               <directionalLight position={[2, 4, 5]} intensity={1.2} color={'#fff8e7'} castShadow />
               <Suspense fallback={null}>
-                {/* Temporarily disabled 3D model
-                <PendantAccent />
-                */}
-                {/* Simple placeholder box instead of 3D model */}
                 <PendantAccent />
               </Suspense>
               <OrbitControls enableZoom={false} enablePan={false} />
@@ -197,7 +183,7 @@ export default function BlogList() {
   );
 }
 // @ts-ignore
-// useGLTF.preload('/viking_book.glb');
+useGLTF.preload('/viking_book.glb');
 
 // Add to global CSS:
 // .animate-float-slow { animation: floatSlow 8s ease-in-out infinite alternate; }
